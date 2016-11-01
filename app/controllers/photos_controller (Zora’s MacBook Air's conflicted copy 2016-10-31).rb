@@ -21,19 +21,14 @@ class PhotosController < ApplicationController
   end
 
   def show
-    @photo = Photo.find_by({ :id => params[:id] })
-    @photo_caption = @photo.caption
-    @photo_source = @photo.source
-    @photo_id =  @photo.id
+    p = Photo.find_by({ :id => params[:id] })
+    @photo.source = params[:the_caption]
+    @photo.source = params[:the_source]
   end
 
   #Actions to UPDATE photos
   def edit
     @photo = Photo.find_by({ :id => params[:id] })
-    @photo_caption = @photo.caption
-    @photo_source = @photo.source
-    @photo_id =  @photo.id
-    @photo.save
   end
 
   def update
@@ -41,10 +36,7 @@ class PhotosController < ApplicationController
     @photo.caption = params[:the_caption]
     @photo.source = params[:the_source]
     @photo.save
-
-    @photo_caption = @photo.caption
-    @photo_source = @photo.source
-    @photo_id =  @photo.id
+    redirect_to("/photos/:id")
   end
 
   #Actions to DELETE photos
